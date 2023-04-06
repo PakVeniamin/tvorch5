@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import PurchaseForm
-from .models import Purchase
+from .models import Purchase, Payment
 from datetime import datetime, timedelta
 
 def purchase_create(request):
