@@ -4,13 +4,14 @@ from django.urls import reverse
 from .forms import PurchaseForm
 from .models import Purchase, Payment
 from datetime import datetime, timedelta
+from decimal import Decimal
 
 def purchase_create(request):
     if request.method == 'POST':
         form = PurchaseForm(request.POST)
         if form.is_valid():
             purchase = form.save(commit=False)
-            purchase.credit_amount = purchase.purchase_price * 0.75
+            purchase.credit_amount = purchase.purchase_price * Decimal(0.75)
             if purchase.credit_amount > 60000:
                 purchase.credit_amount = 60000
             purchase.debt = purchase.credit_amount + purchase.credit_amount * purchase.commission / 100
